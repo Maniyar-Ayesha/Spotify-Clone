@@ -47,32 +47,28 @@ const playWithid = async (id) => {
     setPlayStatus(true);
 }
 
-const previous =  async () => {
-    
-    songsData.map(async(item,index)=>{
-        if (track._id === item._id && index > 0) {
-            
-            await setTrack(songsData[index-1]);
-            await audioRef.current.play();
-            setPlayStatus(true);
+ 
+ 
+const previous = async () => {
+    const currentIndex = songsData.findIndex(item => item._id === track._id);
 
-        }
-    })
-}
+    if (currentIndex > 0) {
+        await setTrack(songsData[currentIndex - 1]);
+        audioRef.current.play();
+        setPlayStatus(true);
+    }
+};
 
-const next =  async () => {
+const next = async () => {
+    const currentIndex = songsData.findIndex(item => item._id === track._id);
 
-    songsData.map(async(item,index)=>{
-        if (track._id === item._id && index < songsData.length) {
-            
-            await setTrack(songsData[index+1]);
-            await audioRef.current.play();
-            setPlayStatus(true);
+    if (currentIndex < songsData.length - 1) {
+        await setTrack(songsData[currentIndex + 1]);
+        audioRef.current.play();
+        setPlayStatus(true);
+    }
+};
 
-        }
-    })
-     
-}
 
 const seekSong = async(e) => {
     audioRef.current.currentTime=((e.nativeEvent.offsetX / seekBg.current.offsetWidth)*audioRef.current.duration)
