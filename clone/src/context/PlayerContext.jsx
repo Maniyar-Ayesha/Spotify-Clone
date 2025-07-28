@@ -49,7 +49,7 @@ const playWithid = async (id) => {
 
 const previous =  async () => {
     
-    songsData,map(async(item,index)=>{
+    songsData.map(async(item,index)=>{
         if (track._id === item._id && index > 0) {
             
             await setTrack(songsData[index-1]);
@@ -62,7 +62,7 @@ const previous =  async () => {
 
 const next =  async () => {
 
-    songsData,map(async(item,index)=>{
+    songsData.map(async(item,index)=>{
         if (track._id === item._id && index < songsData.length) {
             
             await setTrack(songsData[index+1]);
